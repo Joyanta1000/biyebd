@@ -245,7 +245,7 @@
       checking: false,
       heartbeats: [],
       items_lists: [
-          { title: 'SignIn', path: '/signin', icon: 'mdi-account-key' },
+          { title: 'SignIn', path: '/SignIn', icon: 'mdi-account-key' },
           { title: 'About', path: '/about', icon: 'view_agenda' },
           { title: 'Contact', path: '/contact', icon: 'contacts' },
           { title: 'Service', path: '/service', icon: 'miscellaneous_services' },

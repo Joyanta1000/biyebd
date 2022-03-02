@@ -96,7 +96,13 @@ export default {
           { title: 'Profile', path: '/profile', icon: 'mdi-account' },
           { title: 'Logout', path: '/logout', icon: 'logout' },
         ],
+        currentUser : 0,
         }
     },
+    mounted() {
+    if (!this.currentUser == 1) {
+      this.$router.push('/SignIn');
+    }
+  }
 }
 </script>

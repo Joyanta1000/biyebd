@@ -10,56 +10,73 @@ const routes = [
     name: 'Index',
     component: () => import('../views/Index.vue')
   },
+
+  {
+    path: '/SignIn',
+    name: 'SignIn',
+    component: () => import('../components/SignIn.vue')
+  },
+
   {
     path: '/home',
     name: 'Home',
     component: Home
   },
+
   {
     path: '/photos',
     name: 'Photos',
     component: () => import('../views/Photos.vue')
   },
+
   {
     path: '/myStore',
     name: 'myStore',
     component: () => import('../views/myStore.vue')
   },
+
   {
     path: '/ProductList',
     name: 'ProductList',
     component: () => import('../components/ProductList.vue')
   },
+
   {
     path: '/TodoForm',
     name: 'TodoForm',
     component: () => import('../components/TodoForm.vue')
   },
+
   {
     path: '/TodoList',
     name: 'TodoList',
     component: () => import('../components/TodoList.vue')
   },
+
   {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
   },
+
   {
     path: '/contact',
     name: 'Contact',
     component: () => import('../views/Contact.vue')
   },
+
   {
     path: '/service',
     name: 'Service',
     component: () => import('../views/Service.vue')
   },
+
   {
     path: '/profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue')
   }
+
 ]
 
 const router = new VueRouter({

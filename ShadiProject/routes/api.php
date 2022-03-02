@@ -21,7 +21,7 @@ Route::post('/tokens/create', function (Request $request) {
     $checked = Hash::check($request->password, $user->password);
     if ($checked) {
         $token = $user->createToken('Personal Access Token');
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token, 'user' => $user]);
     } else {
         return response()->json(['error' => 'Invalid credentials'], 401);
     }
