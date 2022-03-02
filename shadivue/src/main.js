@@ -1,17 +1,28 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 
-import Router from './router'
+import router from './router'
+
+createApp(App).use(router).use(vuetify).mount('#app')
 // import WebHome from '@/components/WebHome'
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
-new Vue({
-  vuetify,
-  Router,
-  render: h => h(App)
-}).$mount('#app')
+// new Vue({
+//   vuetify,
+//   Router,
+//   components: { App },
+//   render: h => h(App)
+// }).$mount('#app')
+
+// new Vue({
+//   vuetify,
+//   router,
+//   store,
+//   components: { App },
+//   render: h => h(App)
+// }).$mount('#app')
 
 // Vue.use(Router)
 
