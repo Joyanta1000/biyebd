@@ -9,7 +9,7 @@
     <v-footer
     dark
     padless
-  >
+    app>
     <v-card
       flat
       tile
