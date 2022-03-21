@@ -42,13 +42,13 @@
       lazy-validation
       class="pa-md-4 mx-lg-auto"
     >
-      <!-- <v-text-field
+      <v-text-field
         v-model="name"
         :counter="10"
         :rules="nameRules"
         label="Name"
         required
-      ></v-text-field> -->
+      ></v-text-field>
 
       <v-text-field
         v-model="email"
@@ -85,10 +85,19 @@
         required
       ></v-text-field>
 
+      <v-text-field
+        label="Confirm Password"
+        v-model="confirm_password"
+        :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
+        hint="Confirm Password......"
+        type="password"
+        required
+      ></v-text-field>
+
       <br />
 
       <v-btn :disabled="!valid" color="primary" class="mr-4" @click="validate">
-        Login
+        Register
       </v-btn>
 
       <!-- <v-btn
@@ -108,13 +117,8 @@
         Reset Validation
       </v-btn>
 
-      <!-- route link -->
-      <v-btn
-        color="success"
-        class="mr-4"
-        @click="$router.push('/register')"
-      >
-        Register
+      <v-btn color="success" class="mr-4" @click="$router.push('/SignIn')">
+        SignIn
       </v-btn>
     </v-form>
   </v-container>
@@ -170,8 +174,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import "es6-promise/auto";
+import VeeValidate from "vee-validate";
 
 Vue.use(Vuex);
+
+Vue.use(VeeValidate);
 
 // const store = new Vuex.Store({
 //   state: {
@@ -237,6 +244,7 @@ export default {
     info: null,
 
     items_lists: [
+      { title: "Register", path: "/Register", icon: "mdi-account-key" },
       { title: "SignIn", path: "/SignIn", icon: "mdi-account-key" },
       { title: "About", path: "/about", icon: "view_agenda" },
       { title: "Contact", path: "/contact", icon: "contacts" },
@@ -255,17 +263,51 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     message: "",
+
     messageRules: [
       (v) => !!v || "Meassage is required",
       (v) =>
         (v && v.length >= 20) || "Message must be greater than 20 characters",
     ],
     password: "",
+    confirm_password: "",
+
     passwordRules: [
       (v) => !!v || "Password is required",
       (v) =>
         (v && v.length >= 6) || "Password must be greater than 6 characters",
+      // (v) => v === this.confirm_password || "Password must be same",
     ],
+
+    confirmPasswordRules: [
+      (v) => !!v || "Confirm Password is required",
+      (v) =>
+        (v && v.length >= 6) ||
+        "Confirm Password must be greater than 6 characters",
+      //   (v) => v == this.password || "Password must be same",
+    ],
+
+    // matchingPasswords: function() {
+    //   if (this.password == this.confirm_password) {
+    //     return true;
+    //   } else {
+    //     return 'Passwords does not match.';
+    //   }
+    // },
+
+    // password: '',
+    //   confirmPassword: '',
+    //   passwordRules: [
+    //     (value) => !!value || 'Please type password.',
+    //     (value) => (value && value.length >= 6) || 'minimum 6 characters',
+    //   ],
+    //   confirmPasswordRules: [
+    //     (value) => !!value || 'type confirm password',
+    //     (value) =>
+    //       value === this.password || 'The password confirmation does not match.',
+    //   ],
+
+    // password comfirm password must be same
     // select: null,
     // items: [
     //   'Item 1',
@@ -292,7 +334,10 @@ export default {
     //   this.$refs.form.submit()
     // },
     validate() {
-      if (this.$refs.form.validate() == true) {
+    //   if (
+    //     this.password == this.confirm_password &&
+    //     this.$refs.form.validate() == true
+    //   ) {
         // alert(true);
 
         let formData = new FormData();
@@ -335,7 +380,10 @@ export default {
             //handle error
             console.log(response);
           });
-      }
+    //   } else if (this.password != this.confirm_password) {
+    //     alert("Passwords not matched");
+    //     return "Passwords does not match.";
+    //   }
       // alert(this.$refs.form.validate());
     },
     reset() {
@@ -345,5 +393,11 @@ export default {
       this.$refs.form.resetValidation();
     },
   },
+   computed: {
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.confirm_password || "Password must match";
+    }
+  }
 };
 </script>
