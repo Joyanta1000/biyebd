@@ -14,20 +14,12 @@ function createUser($request)
         'password' => 'required|min:6|confirmed',
     ]);
 
-    if ($validator->fails()) {
-        return response()->json([
-            'message' => 'Validation Error',
-            'errors' => $validator->errors()
-        ], 422);
-    }
-
-    $user = User::create([
+    return $validator->fails() ? response()->json([
+        'message' => 'Validation Error',
+        'errors' => $validator->errors()
+    ], 422) : response()->json(['userWithToken' => User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-    ]);
-
-    $token = $user->createToken('Personal Access Token');
-
-    return response()->json(['token' => $token, 'user' => $user, 'message' => 'User Created Successfully'], 200);
+    ])->createToken('Personal Access Token'), 'message' => 'User Created Successfully'], 200);
 }
