@@ -75,6 +75,11 @@
 
   </v-app-bar>
 <h1>My Profile</h1>
+
+<div class="button-block">
+  <button v-if="!$auth.isAuthenticated" @click="login" class="button is-xl is-dark">Sign Up to Browse Events</button>
+  <h3 v-if="$auth.isAuthenticated" class="is-size-3 has-background-dark welcome">Welcome, {{ $auth.user.name }}!</h3>
+</div>
 </v-container>
 
     
@@ -99,10 +104,17 @@ export default {
         currentUser : 0,
         }
     },
+    methods: {
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+  },
     mounted() {
-    if (!this.currentUser == 1) {
+    if (!sessionStorage.getItem("plainTextToken")) {
       this.$router.push('/SignIn');
     }
+    
   }
 }
 </script>

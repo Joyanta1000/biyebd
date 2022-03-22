@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', AuthController::class.'@store')->name('register');
+Route::post('/register', AuthController::class.'@store');
 
 Route::post('/tokens/create', function (Request $request) {
     $user = User::where('email', $request->email)->first();
     $checked = Hash::check($request->password, $user->password);
     if ($checked) {
-        $user->currentAccessToken()->delete();
+        // $user->currentAccessToken()->delete();
         $token = $user->createToken('Personal Access Token');
         return response()->json(['token' => $token, 'user' => $user]);
     } else {

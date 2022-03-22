@@ -340,13 +340,17 @@ export default {
     //   ) {
         // alert(true);
 
+        console.log(this.name, this.email, this.password, this.confirm_password, );
+
         let formData = new FormData();
 
-        // formData.append("name", this.name);
+        formData.append("name", this.name);
         formData.append("email", this.email);
         // formData.append("message", this.message);
         formData.append("password", this.password);
+        formData.append("password_confirmation", this.confirm_password);
         formData.append("token_name", 12345);
+        // formData.append("token_name", 12345);
         // formData.append("action", "insert");
 
         // console.log(this.name);
@@ -355,7 +359,7 @@ export default {
 
         axios({
           method: "post",
-          url: "http://127.0.0.1:8000/api/tokens/create",
+          url: "http://127.0.0.1:8000/api/register",
           data: formData,
           config: {
             headers: { "Content-Type": "application/json; charset=UTF-8" },
@@ -363,17 +367,18 @@ export default {
         })
           .then(function(response) {
             //handle success
-            console.log(response);
+
+            console.log(response.data.userWithToken.plainTextToken);
+
             sessionStorage.setItem(
               "plainTextToken",
-              response.data.token.plainTextToken
+              response.data.userWithToken.plainTextToken
             );
             // this..start();
             // this.$session.set(
             //   "plainTextToken",
             //   response.data.token.plainTextToken
             // );
-            console.log(response.data.token.plainTextToken);
             console.log(sessionStorage.getItem("plainTextToken"));
           })
           .catch(function(response) {

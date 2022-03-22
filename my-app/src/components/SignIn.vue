@@ -285,6 +285,10 @@ export default {
       .catch(({ data }) => {
         console.error(data);
       });
+
+      if (sessionStorage.getItem("plainTextToken")) {
+      this.$router.push('/Profile');
+    }
   },
 
   methods: {
@@ -330,6 +334,8 @@ export default {
             // );
             console.log(response.data.token.plainTextToken);
             console.log(sessionStorage.getItem("plainTextToken"));
+            sessionStorage.getItem("plainTextToken") ? this.$router.push('/Profile') : this.$router.push('/SignIn');
+            
           })
           .catch(function(response) {
             //handle error
