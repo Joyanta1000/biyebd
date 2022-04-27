@@ -8,27 +8,27 @@ import VueSession from "vue-session";
 // import 'bulma/css/bulma.css';
 
 // Import the Auth0 configuration
-import { domain, clientId } from '../auth_config.json';
+// import { domain, clientId } from '../auth_config.json';
 
-// Import the plugin here
-import { Auth0Plugin } from './auth';
+// // Import the plugin here
+// import { Auth0Plugin } from './auth';
 
 // Install the authentication plugin here
 Vue.config.productionTip = false;
 
 Vue.use(VueSession);
 
-Vue.use(Auth0Plugin, {
-  domain,
-  clientId,
-  onRedirectCallback: (appState) => {
-    router.push(
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname,
-    );
-  },
-});
+// Vue.use(Auth0Plugin, {
+//   domain,
+//   clientId,
+//   onRedirectCallback: (appState) => {
+//     router.push(
+//       appState && appState.targetUrl
+//         ? appState.targetUrl
+//         : window.location.pathname,
+//     );
+//   },
+// });
 
 new Vue({
   vuetify,

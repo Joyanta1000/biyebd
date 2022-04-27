@@ -287,7 +287,7 @@ export default {
       });
 
       if (sessionStorage.getItem("plainTextToken")) {
-      this.$router.push('/Profile');
+      Vue.$router.push('/Profile');
     }
   },
 
@@ -334,7 +334,7 @@ export default {
             // );
             console.log(response.data.token.plainTextToken);
             console.log(sessionStorage.getItem("plainTextToken"));
-            sessionStorage.getItem("plainTextToken") ? this.$router.push('/Profile') : this.$router.push('/SignIn');
+            sessionStorage.getItem("plainTextToken") ? Vue.$router.push('/Profile') : Vue.$router.push('/SignIn');
             
           })
           .catch(function(response) {

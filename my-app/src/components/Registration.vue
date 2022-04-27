@@ -380,6 +380,7 @@ export default {
             //   response.data.token.plainTextToken
             // );
             console.log(sessionStorage.getItem("plainTextToken"));
+            sessionStorage.getItem("plainTextToken") ? this.$router.push({name: "/Profile"}) : this.$router.push({name: "/SignIn"});;
           })
           .catch(function(response) {
             //handle error
